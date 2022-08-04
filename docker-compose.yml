@@ -40,13 +40,21 @@ services:
 
   db:
     env_file: docker/.env
-    image: postgres:14
+    image: kartoza/postgis:14
     container_name: superset_db
     restart: unless-stopped
+    volumes:
+      - db_home:/var/lib/postgresql
     ports:
       - "127.0.0.1:5432:5432"
-    volumes:
-      - db_home:/var/lib/postgresql/data
+    # env_file: docker/.env
+    # image: postgres:14
+    # container_name: superset_db
+    # restart: unless-stopped
+    # ports:
+    #   - "127.0.0.1:5432:5432"
+    # volumes:
+    #   - db_home:/var/lib/postgresql/data
 
   superset:
     env_file: docker/.env
